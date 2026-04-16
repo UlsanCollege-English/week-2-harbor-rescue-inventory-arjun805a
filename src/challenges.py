@@ -8,13 +8,9 @@ def mission_snapshot(items: list[object]) -> tuple[object | None, object | None]
 
     Return (None, None) if the list is empty.
     """
-    if len(items) == 0:
+    if not items:
         return (None, None)
-
-    first = items[0]
-    last = items[-1]
-
-    return (first, last)
+    return (items[0], items[-1])
 
 
 def cargo_window(items: list[object], start: int, size: int) -> list[object]:
@@ -22,9 +18,8 @@ def cargo_window(items: list[object], start: int, size: int) -> list[object]:
 
     Return an empty list if ``start`` is out of range or if ``size <= 0``.
     """
-    if start < 0 or start >= len(items) or size <= 0:
+    if size <= 0 or start < 0 or start >= len(items):
         return []
-
     return items[start:start + size]
 
 
@@ -37,7 +32,6 @@ def first_supply_index(items: list[object], target: object) -> int:
     for i in range(len(items)):
         if items[i] == target:
             return i
-
     return -1
 
 
@@ -64,5 +58,4 @@ def priority_load(items: list[object], urgent_item: object) -> list[object]:
     Do not mutate the original input list.
     This is a stretch challenge.
     """
-    new_list = [urgent_item] + items
-    return new_list
+    return [urgent_item] + items
